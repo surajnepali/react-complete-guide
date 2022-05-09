@@ -13,17 +13,19 @@ class App extends Component {
     showPersons: false
   }
 
-  switchEventHandler = (newName) => {
-    // console.log('Was Clicked!!');
-    //DON'T DO THIS: this.state.person[0].name = 'Asmita';
-    this.setState ( {
-      persons: [
-        {name: newName, age: 22 },
-        {name: 'Susmita', age: 23 },
-        {name: 'Susan', age: 19 }
-      ]
-    }) 
-  }
+  // The 'switchEventHandler' method is removed from 4.6 of course.
+
+  // switchEventHandler = (newName) => {
+  //   // console.log('Was Clicked!!');
+  //   //DON'T DO THIS: this.state.person[0].name = 'Asmita';
+  //   this.setState ( {
+  //     persons: [
+  //       {name: newName, age: 22 },
+  //       {name: 'Susmita', age: 23 },
+  //       {name: 'Susan', age: 19 }
+  //     ]
+  //   }) 
+  // }
 
   nameChangedHandler = (event) => {
     this.setState( {
@@ -34,6 +36,18 @@ class App extends Component {
       ]
     } )
   }
+
+  deletePersonHandler = (personIndex) => {
+    //Wondering ?? how can I edit a constant.
+    /*
+      For that, keep in mind that arrays and objects are reference types so, I didn't assign 
+      a new value to the constant, it is only holding the pointer. I only change the element 
+      it was pointing to.    (G Javascript K)
+    */ 
+    const persons   = this.state.persons;
+    persons.splice(personIndex,1);
+    this.setState({persons: persons})
+  }  
 
   togglePersonsHandler =() => {
     const doesShow = this.state.showPersons;
@@ -56,8 +70,11 @@ class App extends Component {
     if(this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
-            return <Person 
+          {/* map() function is the one that converts an array into the one we want
+              according to our will and our instructions. */}
+          {this.state.persons.map((person, index) => {
+            return <Person
+              click= {() => this.deletePersonHandler(index)}  
               name= {person.name}
               age={person.age}/>
           })}
