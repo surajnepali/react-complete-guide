@@ -9,7 +9,8 @@ class App extends Component {
       {name: 'Susmita', age: 23 },
       {name: 'Susan', age: 18 }
     ],
-    otherState: 'sone other value'
+    otherState: 'sone other value',
+    showPersons: false
   }
 
   switchEventHandler = (newName) => {
@@ -34,9 +35,15 @@ class App extends Component {
     } )
   }
 
+  togglePersonsHandler =() => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
+
+
   render() {
 
-    const style={
+    const style={ //since it is javascript, the values should be written in ''.
       backgroundColor: 'white',
       font: 'inherit',
       border: '1px solid blue',
@@ -51,18 +58,23 @@ class App extends Component {
         <p>This is really working!!!</p>
         <button 
           style={style}
-          onClick={() => this.switchEventHandler('Asmita!!')}>Switch Name</button> 
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} />
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          click={this.switchEventHandler.bind(this, 'Kanchhu')}
-          changed={this.nameChangedHandler} >My Hobbies: Dance</Person>
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age} />
+          onClick={this.togglePersonsHandler}>Toggle Persons</button> 
+          {/* conditions cannot be applied here. */}
+        {this.state.showPersons ===true ?   
+          <div>
+            <Person 
+              name={this.state.persons[0].name} 
+              age={this.state.persons[0].age} />
+            <Person 
+              name={this.state.persons[1].name} 
+              age={this.state.persons[1].age}
+              click={this.switchEventHandler.bind(this, 'Kanchhu')}
+              changed={this.nameChangedHandler} >My Hobbies: Dance</Person>
+            <Person 
+              name={this.state.persons[2].name} 
+              age={this.state.persons[2].age} />
+          </div> : null
+        }
       </div>
     );
 
