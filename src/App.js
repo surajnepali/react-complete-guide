@@ -5,9 +5,9 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      {name: 'Suraj', age: 24 },
-      {name: 'Susmita', age: 23 },
-      {name: 'Susan', age: 18 }
+      {id: 'lklw1', name: 'Suraj', age: 24 },
+      {id: 'dlkl3',name: 'Susmita', age: 23 },
+      {id: 'najsb1', name: 'Susan', age: 18 }
     ],
     otherState: 'sone other value',
     showPersons: false
@@ -27,14 +27,34 @@ class App extends Component {
   //   }) 
   // }
 
-  nameChangedHandler = (event) => {
-    this.setState( {
-      persons: [
-        { name: 'Suraj', age: 24 },
-        { name: event.target.value, age: 23 },
-        { name: 'Susan', age: 18 }
-      ]
-    } )
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    // alternative approach for above object of code
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({persons: persons});
+
+    // above line of code instead of using below 6lines of code
+
+    // this.setState( {
+    //   persons: [
+    //     { name: 'Suraj', age: 24 },
+    //     { name: event.target.value, age: 23 },
+    //     { name: 'Susan', age: 18 }
+    //   ]
+    // } )
   }
 
   deletePersonHandler = (personIndex) => {
@@ -44,7 +64,8 @@ class App extends Component {
       a new value to the constant, it is only holding the pointer. I only change the element 
       it was pointing to.    (G Javascript K)
     */ 
-    const persons   = this.state.persons;
+    // const persons   = this.state.persons.slice();
+    const persons = [...this.state.persons];
     persons.splice(personIndex,1);
     this.setState({persons: persons})
   }  
@@ -76,7 +97,9 @@ class App extends Component {
             return <Person
               click= {() => this.deletePersonHandler(index)}  
               name= {person.name}
-              age={person.age}/>
+              age= {person.age}
+              key= {person.id}
+              changed= {(event) => this.nameChangedHandler(event, person.id)}/>
           })}
           {/* <Person 
             name={this.state.persons[0].name} 
@@ -90,7 +113,7 @@ class App extends Component {
             name={this.state.persons[2].name} 
             age={this.state.persons[2].age} /> */}
         </div>
-      )
+      );
     }
 
     return (
