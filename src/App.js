@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium, { StyleRoot } from 'radium';
+// import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -86,17 +86,16 @@ class App extends Component {
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+      // ':hover': {
+      //   backgroundColor: 'lightgreen',
+      //   color: 'black'
+      // }
     };
 
     let persons = null;
 
     if(this.state.showPersons) {
       persons = (
-        <StyleRoot>
           <div>
           {/* map() function is the one that converts an array into the one we want
               according to our will and our instructions. */}
@@ -120,14 +119,13 @@ class App extends Component {
             name={this.state.persons[2].name} 
             age={this.state.persons[2].age} /> */}
         </div>
-        </StyleRoot>
         
       );
       style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      // style[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // }
     }
 
     let classes = [];
@@ -214,4 +212,4 @@ class App extends Component {
   
 // }
 
-export default Radium(App); 
+export default App; 
