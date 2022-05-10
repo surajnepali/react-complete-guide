@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Radium from 'radium';
 import './Person.css';
 
 const person = (props) => { //arrow function
@@ -20,4 +20,4 @@ const person = (props) => { //arrow function
    
 };
 
-export default person;
+export default Radium(person);
