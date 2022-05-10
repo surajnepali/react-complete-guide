@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -96,7 +96,8 @@ class App extends Component {
 
     if(this.state.showPersons) {
       persons = (
-        <div>
+        <StyleRoot>
+          <div>
           {/* map() function is the one that converts an array into the one we want
               according to our will and our instructions. */}
           {this.state.persons.map((person, index) => {
@@ -119,6 +120,8 @@ class App extends Component {
             name={this.state.persons[2].name} 
             age={this.state.persons[2].age} /> */}
         </div>
+        </StyleRoot>
+        
       );
       style.backgroundColor = 'red';
       style[':hover'] = {
