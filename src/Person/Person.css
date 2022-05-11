@@ -10,8 +10,8 @@
 
 /* We can do this but we'll below block of code. I don't to use my css class*/
 
-/* @media (min-width: 500px) {
+@media (min-width: 500px) {
     .Person{
         width: 450px;
     }
-} */
+}
