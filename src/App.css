@@ -45,6 +45,7 @@
   font-weight: bold;
 }
 
+/* For every button nested inside our 'app' class */
 .App button {
   border: 1x solid blue;
   padding: 16px;
