@@ -79,20 +79,23 @@ class App extends Component {
 
   render() {
 
-    const style={ //since it is javascript, the values should be written in ''.
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-      // ':hover': {
-      //   backgroundColor: 'lightgreen',
-      //   color: 'black'
-      // }
-    };
+    // commented for adding pseudo selectors
+
+    // const style={ //since it is javascript, the values should be written in ''.
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    //   font: 'inherit',
+    //   border: '1px solid blue',
+    //   padding: '8px',
+    //   cursor: 'pointer'
+    //   // ':hover': {
+    //   //   backgroundColor: 'lightgreen',
+    //   //   color: 'black'
+    //   // }
+    // };
 
     let persons = null;
+    let btnClass = '';
 
     if(this.state.showPersons) {
       persons = (
@@ -121,7 +124,14 @@ class App extends Component {
         </div>
         
       );
-      style.backgroundColor = 'red';
+      btnClass = classes.Red; // button class always needs to be a string  if we assign it to
+            // class name and classes Red in the end is just a string created by the css loader
+            // which gives us still access to the class like this
+            // But in the end returns a string with the valid css or it is an empty string if 
+            // we're outside of this 'if' condition 
+
+
+      // style.backgroundColor = 'red'; // commented for adding pseudo selectors
       // style[':hover'] = {
       //   backgroundColor: 'salmon',
       //   color: 'black'
@@ -142,7 +152,7 @@ class App extends Component {
         <h1>Hi, I'm React App.</h1>
         <p className={assignedClasses.join(' ')}>This is really working!!!</p>
         <button 
-          style={style}
+          className={btnClass}
           onClick={this.togglePersonsHandler}>Toggle Persons</button> 
           {/* conditions cannot be applied here. */}
         {/* {this.state.showPersons ===true ?   
