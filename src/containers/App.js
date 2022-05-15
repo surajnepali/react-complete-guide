@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 // import Radium, { StyleRoot } from 'radium';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -95,36 +96,36 @@ class App extends Component {
     // };
 
     let persons = null;
-    let btnClass = '';
+    // let btnClass = '';
 
     if(this.state.showPersons) {
-      persons = (
-          <div>
-          {/* map() function is the one that converts an array into the one we want
-              according to our will and our instructions. */}
-          {this.state.persons.map((person, index) => {
-            return <Person
-                click= {() => this.deletePersonHandler(index)}  
-                name= {person.name}
-                age= {person.age}
-                key= {person.id} // commented to examine the error-boundaries working
-                changed= {(event) => this.nameChangedHandler(event, person.id)} />
-          })}
-          {/* <Person 
-            name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} />
-          <Person 
-            name={this.state.persons[1].name} 
-            age={this.state.persons[1].age}
-            click={this.switchEventHandler.bind(this, 'Kanchhu')}
-            changed={this.nameChangedHandler} >My Hobbies: Dance</Person>
-          <Person 
-            name={this.state.persons[2].name} 
-            age={this.state.persons[2].age} /> */}
-        </div>
+      persons = <Persons 
+              persons = {this.state.persons}
+              clicked = {this.deletePersonHandler}
+              changed = {this.nameChangedHandler}/>;
+          // {/* map() function is the one that converts an array into the one we want
+          //     according to our will and our instructions. */}
+          // {/* {this.state.persons.map((person, index) => {
+          //   return <Person
+          //       click= {() => this.deletePersonHandler(index)}  
+          //       name= {person.name}
+          //       age= {person.age}
+          //       key= {person.id} // commented to examine the error-boundaries working
+          //       changed= {(event) => this.nameChangedHandler(event, person.id)} />
+          // })} */}
+          // {/* <Person 
+          //   name={this.state.persons[0].name} 
+          // age={this.state.persons[0].age} />
+          // <Person 
+          //   name={this.state.persons[1].name} 
+          //   age={this.state.persons[1].age}
+          //   click={this.switchEventHandler.bind(this, 'Kanchhu')}
+          //   changed={this.nameChangedHandler} >My Hobbies: Dance</Person>
+          // <Person 
+          //   name={this.state.persons[2].name} 
+          //   age={this.state.persons[2].age} /> */}
         
-      );
-      btnClass = classes.Red; // button class always needs to be a string  if we assign it to
+      // btnClass = classes.Red; // button class always needs to be a string  if we assign it to
             // class name and classes Red in the end is just a string created by the css loader
             // which gives us still access to the class like this
             // But in the end returns a string with the valid css or it is an empty string if 
@@ -138,22 +139,22 @@ class App extends Component {
       // }
     }
 
-    let assignedClasses = [];
-    if(this.state.persons.length <= 2){
-      assignedClasses.push(classes.red) //classes = ['red']
-    }
-    if(this.state.persons.length <= 1){
-      assignedClasses.push(classes.bold) //classes = ['red', 'bold']
-    }
+    // let assignedClasses = [];
+    // if(this.state.persons.length <= 2){
+    //   assignedClasses.push(classes.red) //classes = ['red']
+    // }
+    // if(this.state.persons.length <= 1){
+    //   assignedClasses.push(classes.bold) //classes = ['red', 'bold']
+    // }
 
     return (
       //JSX
       <div className={classes.App}>
-        <h1>Hi, I'm React App.</h1>
+        {/* <h1>Hi, I'm React App.</h1>
         <p className={assignedClasses.join(' ')}>This is really working!!!</p>
         <button 
           className={btnClass}
-          onClick={this.togglePersonsHandler}>Toggle Persons</button> 
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>  */}
           {/* conditions cannot be applied here. */}
         {/* {this.state.showPersons ===true ?   
           <div>
@@ -170,6 +171,10 @@ class App extends Component {
               age={this.state.persons[2].age} />
           </div> : null
         } */}
+        <Cockpit 
+          showPersons = {this.state.showPersons}
+          persons = {this.state.persons} 
+          clicked = {this.togglePersonsHandler}/>
         {persons}
       </div>
     );
